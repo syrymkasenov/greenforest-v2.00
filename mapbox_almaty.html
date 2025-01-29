@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Air_pollution_map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 5px; bottom: 30px; width: 100%; }
+#menu {
+        position: absolute;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'Open Sans', sans-serif;
+        max-width: 180px;
+    }
+    #worldview-options {
+        margin-top: 5px;
+    }
+</style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="map-container1">
+        <ul class="map-vertical-list1">
+          <li class="map-vertical-item active">
+            <button class="map-vertical-btn">
+              PM2.5
+            </button>
+          </li>
+
+          <li class="map-vertical-item">
+            <button class="map-vertical-btn">
+              PM10
+            </button>
+          </li>
+
+          <li class="map-vertical-item">
+            <button class="map-vertical-btn">
+              SO2
+            </button>
+          </li>
+
+          <li class="map-vertical-item">
+            <button class="map-vertical-btn">
+              CO
+            </button>
+          </li>
+
+          <li class="map-vertical-item">
+            <button class="map-vertical-btn">
+              NO2
+            </button>
+          </li>
+        </ul>
+    </div>
+    
+    <div style="position: absolute; top: 10px; right: 10px;">
+        <button onclick="toggleDropdown()" style="padding: 10px 20px; font-size: 18px; cursor: pointer; background: white; border: 1px solid #ccc; border-radius: 4px;">
+          City 
+        </button>
+        <div id="dropdownMenu" style="display: none; background: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: absolute; right: 0; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;">
+            <a href="mapbox_usk.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Ust-Kamenogorsk</a>
+            <a href="mapbox_temirtau.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Temirtau</a>
+            <a href="mapbox_almaty.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Almaty</a>
+            <a href="mapbox_zhez.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Zhezkazgan</a>
+            <a href="mapbox_zhanatas.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Zhanatas</a>
+            <a href="mapbox_shymkent.html" style="display: block; padding: 10px 20px; text-decoration: none; color: black;">Shymkent</a>
+        </div>
+    </div>
+    
+    <script>
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+<script>
+  const lowIntensity = 0.2;
+  const mediumIntensity = 0.5;
+  const highIntensity = 0.8;
+  
+  function calculateIntensityAndWeight(value, mpc_daily_average) {
+      const difference = value - mpc_daily_average;
+      const normalizedDifference = difference / mpc_daily_average;
+
+      let intensity, weight;
+
+      if (normalizedDifference < -0.5) {
+          intensity = lowIntensity;
+          weight = 0.5;
+      } else if (normalizedDifference >= -0.5 && normalizedDifference < 0.5) {
+          intensity = mediumIntensity;
+          weight = 1;
+      } else {
+          intensity = highIntensity;
+          weight = 1.5;
+      }
+
+      return { intensity, weight };
+  }
+
+  function createMarkerData(data) {        
+      let result = {
+          "type": "FeatureCollection",
+          "features": []
+      };
+      
+      let resultArr = result["features"];
+
+      data.forEach((point, index) => {
+          point.color = '#103ef2'
+          const obj = {
+          "type": "Feature",
+          "properties": {...point},
+          "geometry": {
+              "type": "Point",
+              "coordinates": [
+                  point['lng'],
+                  point['lat']
+              ]
+          }
+          }
+
+          resultArr.push(obj);
+      });
+
+      return result;
+  }
+
+  function createHeatMapData(data, kazHydrometCode) {
+    const postData = data[0];
+    const apiData = data[1];     
+    switch (kazHydrometCode) {
+      case 'PM2.5':
+          kazHydrometCode = 'PM2.5 suspended particles';
+          break;
+      case 'PM10':
+          kazHydrometCode = 'PM10 suspended particles';
+          break;
+      case 'SO2':
+          kazHydrometCode= 'Sulfur dioxide (SO₂)';
+          break;
+      case 'CO':
+          kazHydrometCode = 'Carbon monoxide (CO)';
+          break;
+      case 'NO2':
+          kazHydrometCode = 'Nitrogen dioxide (NO₂)';
+          break;
+      default:
+          break;
+    }      
+    console.log("kazHydrometCode=", kazHydrometCode);     
+    
+    let result = {
+        "type": "FeatureCollection",
+        "features": []
+    };
+    
+    let resultArr = result["features"];
+    
+    for (let i = 0; i < apiData.length; i++) {    
+      if (apiData[i]['name_en'] === kazHydrometCode){
+      //console.log(kazHydrometCode, " value= ", apiData[i].value);
+      //console.log(kazHydrometCode," mpcdailyaverage= ", apiData[i].mpcdailyaverage);            
+      let heatObj = calculateIntensityAndWeight(apiData[i].value, apiData[i].mpcdailyaverage);
+      //console.log(heatObj);      
+        for (let j = 0; j < postData.length; j++){
+          if (apiData[i]['point_id'] === postData[j]['id']){
+            const obj = {
+                "type": "Feature",
+                "properties": {
+                    "intensity": heatObj.intensity,
+                    "weight": heatObj.weight
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        postData[j]['lng'],
+                        postData[j]['lat']
+                    ]
+                }
+            }                
+            resultArr.push(obj);                   
+          }                                    
+        }
+      }    
+    }     
+    return result;
+  }
+  
+  function initialMap() {
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmV3LWFyenVtIiwiYSI6ImNsa3RleHZqcjA4cjIzaHFvOWo5N3Fwd2kifQ.PsFrJKqS4c1TXF55eEziSQ';
+      const map = new mapboxgl.Map({
+          container: 'map', // container ID
+          style: 'mapbox://styles/mapbox/streets-v12', 
+          center: [76.89619, 43.254534],
+          // 76.945627, 43.237163
+          // 82.61606, 49.972695
+          zoom: 12
+      });
+
+      return map;
+  }
+
+  function initialMarkerMap(data, map) {
+      const markerData = createMarkerData(data);
+
+      map.on('load', function() {
+          map.addLayer({
+          id: 'marker-layer', // Уникальный идентификатор слоя
+          type: 'circle',
+          source: {
+              type: 'geojson',
+              data: markerData
+          },
+          'paint': {
+              'circle-color': '#7c15f2',
+              'circle-radius': 6                
+          }                     
+          });            
+      });
+  }
+
+  function addHeatMapLayer(data, map) {
+      if(map.getSource('heatmap-source')) {
+          map.getSource('heatmap-source').setData(data);
+          map.triggerRepaint();
+      }
+
+      map.on('load', function () {
+          map.addSource('heatmap-source', {
+          type: 'geojson',
+          data: data
+          });
+
+          map.addLayer({
+          id: 'heatmap-layer',
+          type: 'heatmap',
+          source: "heatmap-source",
+          paint: {
+              'heatmap-opacity': 0.6,
+              'heatmap-radius': [
+              'interpolate',
+              ['exponential', 2],
+              ['zoom'],
+              0, 10, // Начальный масштаб и радиус
+              9, 100, // Масштаб, на котором радиус остается 100
+              11, 200, // Масштаб, на котором радиус увеличивается до 200
+              12, 400, // Масштаб, на котором радиус увеличивается до 200
+              13, 800, // Масштаб, на котором радиус увеличивается до 200
+              14, 1000, // Масштаб, на котором радиус увеличивается до 200
+              15, 1200, // Масштаб, на котором радиус увеличивается до 200
+              16, 1400, // Масштаб, на котором радиус увеличивается до 200
+              17, 1600, // Масштаб, на котором радиус увеличивается до 200
+              18, 1800, // Масштаб, на котором радиус увеличивается до 200
+              19, 2000, // Масштаб, на котором радиус увеличивается до 200
+              ],
+              'heatmap-weight': [
+              'interpolate',
+              ['linear'],
+              ['get', 'intensity'],
+              0, 0,
+              1, 0.7
+              ],
+              'heatmap-intensity': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              0, 1,
+              9, 3
+              ],
+              'heatmap-color': [
+              'interpolate',
+              ['linear'],
+              ['heatmap-density'],
+              0, 'rgba(81,244,26,0)',
+              0.2, 'rgb(241,244,26)',
+              0.4, 'rgb(244,161,26)',
+              0.6, 'rgb(244,85,26)',
+              0.8, 'rgb(206,18,18)',
+              1, 'rgb(145,18,18)'
+              ]
+          }
+          }); 
+      });
+  }
+  
+  function initialHeatMap(data, map) {
+    const initialKhmCode = document.querySelector('.map-vertical-item.active').querySelector('button').innerHTML.trim();   
+    
+    let currentKhmCode = initialKhmCode;
+    let heatmapSourceData = createHeatMapData(data, currentKhmCode);
+
+    addHeatMapLayer(heatmapSourceData, map);
+    
+    
+    const pollutionBtns = document.querySelectorAll('.map-vertical-item');
+
+    const handlePollutionBtnClick = (khmCode) => {
+      currentKhmCode = khmCode;
+      heatmapSourceData = createHeatMapData(data, currentKhmCode);
+      map.getSource('heatmap-source').setData(heatmapSourceData);
+      map.triggerRepaint();
+    };    
+
+    pollutionBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+      const activeBtn = document.querySelector('.map-vertical-item.active');
+      if (activeBtn) {
+          activeBtn.classList.remove('active');
+      }
+      btn.classList.add('active');
+      const khmCode = btn.querySelector('button').innerHTML.trim();
+      
+      // Обновляем данные тепловой карты
+      handlePollutionBtnClick(khmCode);      
+      });
+    }); 
+  }
+      
+  function getCurrentDateTime(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+
+      return `${year}-${month}-${day}-${hours}-${minutes}-00`;
+  }
+
+  function fetchBaseTime(map, date) {
+      const currentDateTimeStr = getCurrentDateTime(date);
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWNhZ29yQG91dGxvb2suY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiS2F6aHlkcm9tZXQiLCJuYmYiOjE2NzcxMzA2NjAsImV4cCI6MTcwODc1MzA2MCwiaXNzIjoiU21hcnRFY28iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjA3LyJ9.gpFBGaHbJ5sdv5AWU0TkujO6E4sR_HxRKgUrd7nrcaQ";
+      
+      Promise.all([
+          fetch('https://ecomodeling.kz/api/v2/posts/', {
+              method: 'GET',
+              headers: {
+                  'Authorization': 'Bearer ' + token,
+                  'Content-Type': 'application/json'
+              }
+          }),
+          fetch('https://ecomodeling.kz/api/v2/data/?datetime=$'+currentDateTimeStr, {
+              method: 'GET',
+              headers: {
+                  'Authorization': 'Bearer ' + token,
+                  'Content-Type': 'application/json'
+              }
+          })
+      ])
+      .then(responses => Promise.all(responses.map(response => response.json())))
+      .then(data => {
+          const postData = data[0];
+          const apiData = data[1];
+          const map = initialMap();
+          initialMarkerMap(postData, map);
+          initialHeatMap(data, map); 
+      })
+      .catch(error => console.error("Error: ", error));        
+  }
+
+  function setTimeBtns(currentDateTime) {
+    const timeBtns = document.querySelectorAll('.map-horizontal-item');
+    
+    for (let i = timeBtns.length - 1; i > 0; i--) {
+      const btnTime = new Date(currentDateTime.getTime());
+      btnTime.setMinutes(btnTime.getMinutes() - (i - 1) * 20);    
+      const btnTimeStr = `${btnTime.getHours()}-${btnTime.getMinutes() > 0 ? btnTime.getMinutes() : '00'}`;
+
+      let timeBtn = timeBtns[timeBtns.length - i];
+      timeBtn.innerHTML = `<button class="map-horizontal-btn">${btnTimeStr}</button>`
+    }
+  }
+
+  function changeTimeEvent(map, timeBtn, currentDateTime) { 
+    const btnTimeStr = timeBtn.querySelector('button').innerHTML.trim();  
+    const btnTimeParts = btnTimeStr.split('-');
+    const btnTime = new Date(currentDateTime.getTime());
+    btnTime.setHours(parseInt(btnTimeParts[0]));
+    btnTime.setMinutes(parseInt(btnTimeParts[1]));
+    
+    document.querySelector('.map-horizontal-item.active').classList.remove('active');
+    timeBtn.classList.add('active');      
+    
+    fetchBaseTime(map, btnTime);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const map = initialMap();  
+    const currentDateTime = new Date();  
+
+    currentDateTime.setMinutes(parseInt(currentDateTime.getMinutes() / 20) * 20);  
+    const timeBtns = Array.from(document.querySelectorAll('.map-horizontal-item')).slice(1);
+    
+    setTimeBtns(currentDateTime);
+    fetchBaseTime(map, currentDateTime);
+    
+    timeBtns.forEach((timeBtn) => {
+      timeBtn.addEventListener('click', () => {
+        changeTimeEvent(map, timeBtn, currentDateTime);
+      });
+    });
+
+    const animateBtn = document.querySelector('.animate-item');
+    let intervalId;
+    let index = 0;
+
+    function handleButtonClick() {
+      if (index < timeBtns.length) {
+        const button = timeBtns[index];
+        changeTimeEvent(map, button, currentDateTime);
+        index++;
+      } else {  
+        clearInterval(intervalId);
+      }
+    }
+
+    animateBtn.addEventListener('click', () => {
+      index = 0; // Сбросить индекс перед началом анимации
+      intervalId = setInterval(handleButtonClick, 1000);
+      console.log("intervalId=", intervalId);
+    });
+  });
+      
+</script>
+
+<div class="map-container">
+    <ul class="map-horizontal-list">
+        <li class="map-horizontal-item animate-item">
+          <button class="map-horizontal-btn animate-btn">
+            Animate
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+            <button class="map-horizontal-btn">
+              11:00
+            </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+            <button class="map-horizontal-btn">
+              11:00
+            </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+            <button class="map-horizontal-btn">
+              11:00
+            </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    
+        <li class="map-horizontal-item active">
+          <button class="map-horizontal-btn">
+            11:00
+          </button>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Our Project</title>
+    <!-- Подключаем библиотеку для построения диаграмм -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Подключаем стили Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <!-- Plugin css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/lightcase.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.nstSlider.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/flexslider.css" media="all" />
+
+    <!-- own style css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/rtl.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css" media="all" />
+</head>
+
+<body>
+    <div class="box-layout">
+        <div class="box-style">
+            <div class="color-btn">
+                <a href="#"><i class="fa fa-cog fa-spin" aria-hidden="true"></i></a>
+            </div>
+            <div class="box-style-inner">
+                <h3>Box Layout</h3>
+                <div class="box-element">
+                    <div class="box-heading">
+                        <h5>HTML Layout</h5>
+                    </div>
+                    <div class="box-content">
+                        <ul class="box-customize">
+                            <li><a class="boxed-btn" href="#">Boxed</a></li>
+                            <li><a class="wide-btn" href="#">Wide</a></li>
+                            <li><a class="rtl-btn" href="#">Rtl</a></li>
+                            <li><a class="ltl-btn" href="#">Ltl</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-element">
+                    <div class="box-heading">
+                        <h5>Backgroud Images</h5>
+                    </div>
+                    <div class="box-content">
+                        <ul class="box-bg-img">
+                            <li>
+                                <a class="bg-1" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-2" href="#"><img src="assets/images/box-style/02.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-3" href="#"><img src="assets/images/box-style/03.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-4" href="#"><img src="assets/images/box-style/04.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-5" href="#"><img src="assets/images/box-style/05.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-6" href="#"><img src="assets/images/box-style/06.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-7" href="#"><img src="assets/images/box-style/07.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="bg-8" href="#"><img src="assets/images/box-style/08.jpg" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-element">
+                    <div class="box-heading">
+                        <h5>Backgroud Pattern</h5>
+                    </div>
+                    <div class="box-content">
+                        <ul class="box-pattern-img">
+                            <li>
+                                <a class="pt-1" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-2" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-3" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-4" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-5" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-6" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-7" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a class="pt-8" href="#"><img src="assets/images/box-style/01.jpg" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Pre-Loader -->
+        <header class="header-style-2">
+            <!-- .bg-header-top -->
+            <!-- Start Menu -->
+            <div class="bg-main-menu menu-scroll">
+                <div class="container">
+                    <div class="row">
+                        <div class="main-menu">
+                            <div class="main-menu-bottom">
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="index_kz.html"><img src="assets/images/home01/logo.png" alt="logo" class="img-responsive" /></a>
+                                    <button type="button" class="navbar-toggler collapsed d-lg-none" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span class="navbar-toggler-icon">
+                                            <i class="fa fa-bars"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="main-menu-area">
+                                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                                        <ul>
+                                            <li>
+                                                <a href="index_kz.html" class="active">Басты бет</a></li>
+                                            <li>
+                                            <li>
+                                                <a href="data_kz.html"></i>Жылдар бойынша деректер</a>
+                                            </li>
+                                            <!-- <a href="#">Данные</a> -->
+                                            <!-- <ul class="sub-menu">
+                                                <li>
+                                                    <a href="data.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Исторические данные</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Данные по годам</a>
+                                                </li>
+                                            </ul> -->
+                                            </li>
+                                            <li><a href="project_kz.html">Статистика</a></li>
+                                            <li><a href="about_kz.html">Жоба туралы</a></li>
+                                            <li>
+                                                <a href="team_kz.html">Орындаушылар</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Тілі</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="index_kz.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Қазақша</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="index.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Русский</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="index_eng.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>English</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="menu-right-option pull-right">
+                                            <!-- <div class="search-box">
+                                                <i class="fa fa-search first_click" aria-hidden="true" style="display: block;"></i>
+                                                <i class="fa fa-times second_click" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                            <div class="search-box-text">
+                                                <form action="search">
+                                                    <input type="text" name="search" id="all-search" placeholder="Search Here">
+                                                </form>
+                                            </div> -->
+                                        </div>
+                                        <!-- .header-search-box -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Start Page Header Section -->
+        <section class="bg-page-header">
+            <div class="page-header-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h2>Қазақстан қалаларындағы ауа сапасының мониторингі: ластаушы заттар бойынша статистика</h2>
+                            </div>
+                            <!-- .page-title -->
+
+                            <!-- .page-header-content -->
+                        </div>
+                        <!-- .page-header -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .page-header-overlay -->
+        </section>
+        <!-- End Page Header Section -->
+
+        <section>
+            <div class="container mt-5">
+                <div class="section-header">
+                    <p class="card-text" style="margin-top: 10px; font-size: 30px; color: black;">Соңғы 12 сағат ішінде ластаушы заттар туралы статистиканы көру үшін төмендегі батырманы басу арқылы қаланы таңдаңыз.</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- Общая кнопка Dropdown для выбора города -->
+                        <div class="dropdown mb-3">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="cityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Қаланы таңдаңыз
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="cityDropdown">
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Almaty')">Алматы</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Ust-Kamenogorsk')">Өскемен</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Karaganda')">Қарағанды</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Astana')">Астана</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Shymkent')">Шымкент</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Atyrau')">Атырау</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Aktau')">Ақтау</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Semey')">Семей</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Taraz')">Тараз</a>
+                                <a class="dropdown-item" href="#" onclick="updateAllCharts('Aktobe')">Ақтөбе</a>
+                        </div>
+                        
+                        </div>
+            
+                        <!-- Добавляем контейнеры для каждой диаграммы -->
+                        <div class="container mt-5">
+            
+                            <!-- Диаграмма для PM2.5 -->
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">PM2.5</h5>
+                                    <div class="chart-container">
+                                        <canvas id="pm25Chart"></canvas>
+                                    </div>
+                                    <div id="pm25Info"></div>
+                                </div>
+                            </div>
+            
+                            <!-- Диаграмма для PM10 -->
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">PM10</h5>
+                                    <div class="chart-container">
+                                        <canvas id="pm10Chart"></canvas>
+                                    </div>
+                                    <div id="pm10Info"></div>
+                                </div>
+                            </div>
+            
+                            <!-- Диаграмма для CO -->
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">CO</h5>
+                                    <div class="chart-container">
+                                        <canvas id="coChart"></canvas>
+                                    </div>
+                                    <div id="coInfo"></div>
+                                </div>
+                            </div>
+            
+                            <!-- Диаграмма для SO2 -->
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">SO2</h5>
+                                    <div class="chart-container">
+                                        <canvas id="so2Chart"></canvas>
+                                    </div>
+                                    <div id="so2Info"></div>
+                                </div>
+                            </div>
+            
+                            <!-- Диаграмма для NO2 -->
+                            <div class="card mt-5">
+                                <div class="card-body">
+                                    <h5 class="card-title">NO2</h5>
+                                    <div class="chart-container">
+                                        <canvas id="no2Chart"></canvas>
+                                    </div>
+                                    <div id="no2Info"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        <!-- Подключаем jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <!-- Подключаем скрипт Bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+            // Глобальные переменные для хранения текущих графиков
+            let pm10Chart, coChart, so2Chart, no2Chart, pm25Chart;
+            
+            // Объект для хранения экземпляров диаграмм
+            let chartInstances = {
+                    pm10: null,
+                    co: null,
+                    so2: null,
+                    no2: null,
+                    pm2_5: null
+            };
+            
+            // Функция для уничтожения диаграммы
+            function destroyChart(substance) {
+                    if (chartInstances[substance]) {
+                            chartInstances[substance].destroy();
+                            chartInstances[substance] = null;
+                    }
+            }
+            
+            // Функция для обновления данных на диаграмме
+            function updateChart(substance, city, chartId, infoId) {
+                    // Определяем координаты и временной диапазон для каждого города
+                    let lat, lon, startUnixTime, endUnixTime;
+                    switch (city) {
+                            case 'Almaty':
+                                    lat = 43.25;
+                                    lon = 76.95;
+                                    break;
+                            case 'Ust-Kamenogorsk':
+                                    lat = 49.9714;
+                                    lon = 82.6059;
+                                    break;
+                            case 'Karaganda':
+                                    lat = 49.8074;
+                                    lon = 73.1053;
+                                    break;
+                                    case 'Astana':
+                                    lat = 51.1694;
+                                    lon = 71.4491;
+                                    break;
+                            case 'Shymkent':
+                                    lat = 42.3176;
+                                    lon = 69.5907;
+                                    break;
+                            case 'Atyrau':
+                                    lat = 47.1054;
+                                    lon = 51.9271;
+                                    break;
+                            case 'Aktau':
+                                    lat = 43.6481;
+                                    lon = 51.1685;
+                                    break;
+                            case 'Semey':
+                                    lat = 50.4114;
+                                    lon = 80.2275;
+                                    break;
+                            case 'Taraz':
+                                    lat = 42.9;
+                                    lon = 71.3667;
+                                    break;
+                            case 'Aktobe':
+                                    lat = 50.2797;
+                                    lon = 57.2072;
+                                    break;
+                            default:
+                                    return;
+                    }
+            
+                    // Получаем текущее время и вычитаем 12 часов
+                    const currentTime = new Date();
+                    const startTime = new Date(currentTime.getTime() - 12 * 60 * 60 * 1000);
+                    const endTime = currentTime;
+            
+                    // Форматируем время в формат Unix
+                    startUnixTime = Math.round(startTime.getTime() / 1000);
+                    endUnixTime = Math.round(endTime.getTime() / 1000);
+            
+                    // Формируем URL-адрес запроса
+                    const apiUrl = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${lat}&lon=${lon}&start=${startUnixTime}&end=${endUnixTime}&appid=6a1e4a8d55690dab85972220b8c1e86d`;
+            
+                    // Получаем данные с API OpenWeatherMap
+                    fetch(apiUrl)
+                            .then(response => {
+                                    if (!response.ok) {
+                                            throw new Error('Failed to fetch data');
+                                    }
+                                    return response.json();
+                            })
+                            .then(data => {
+                                    // Проверяем наличие данных и их корректность
+                                    if (data && Array.isArray(data.list) && data.list.length > 0) {
+                                            const pollutionData = data.list.map(item => item.components[substance]);
+                                            const timestamps = data.list.map(item => new Date(item.dt * 1000).toLocaleString('en-US', { hour: 'numeric', hour12: true }));
+            
+                                            // Уничтожаем существующую диаграмму, если она есть
+                                            destroyChart(substance);
+            
+                                            // Обновляем данные на диаграмме
+                                            const ctx = document.getElementById(chartId).getContext('2d');
+                                            chartInstances[substance] = new Chart(ctx, {
+                                                    type: 'bar',
+                                                    data: {
+                                                            labels: timestamps,
+                                                            datasets: [{
+                                                                            label: substance.toUpperCase(),
+                                                                            data: pollutionData,
+                                                                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Зелёный цвет
+                                                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                                                            borderWidth: 1
+                                                                    },
+                                                                    {
+                                                                            label: 'Среднесуточный ПДК',
+                                                                            data: (substance === 'pm10' ? Array(pollutionData.length).fill(6) : 
+                                                                                    substance === 'pm2_5' ? Array(pollutionData.length).fill(3.5) :
+                                                                                    substance === 'no2' ? Array(pollutionData.length).fill(4) :
+                                                                                    substance === 'co' ? Array(pollutionData.length).fill(300) :
+                                                                                    substance === 'so2' ? Array(pollutionData.length).fill(5) : []
+                                                                                    ), // Значение среднесуточного ПДК
+                                                                            type: 'line',
+                                                                            fill: false,
+                                                                            borderColor: 'rgba(255, 206, 86, 1)', // Желтая линия
+                                                                            borderWidth: 2,
+                                                                            borderDash: [5, 5],
+                                                                            pointRadius: 0,
+                                                                    },
+                                                                    {
+                                                                            label: 'Максимально разовый ПДК',
+                                                                            data: (substance === 'pm10' ? Array(pollutionData.length).fill(30) : 
+                                                                                    substance === 'pm2_5' ? Array(pollutionData.length).fill(16) :
+                                                                                    substance === 'no2' ? Array(pollutionData.length).fill(20) :
+                                                                                    substance === 'co' ? Array(pollutionData.length).fill(500) :
+                                                                                    substance === 'so2' ? Array(pollutionData.length).fill(50) : []
+                                                                                    ), // Значение максимально разового ПДК
+                                                                            type: 'line',
+                                                                            fill: false,
+                                                                            borderColor: 'rgba(255, 99, 132, 1)', // Красная линия
+                                                                            borderWidth: 2,
+                                                                            borderDash: [5, 5],
+                                                                            pointRadius: 0,
+                                                                    }
+                                                            ]
+                                                    },
+                                                    options: {
+                                                            scales: {
+                                                                    yAxes: [{
+                                                                            type: 'linear' // Скрываем шкалу для линейных данных
+                                                                    }]
+                                                            }
+                                                    }
+                                            });
+            
+                                            // Выводим имя города
+                                            document.getElementById(infoId).innerHTML = `
+                                                    <p><strong>Город:</strong> ${city}</p>
+                                            `;
+                                    } else {
+                                            console.log('No data available');
+                                    }
+                            })
+                            .catch(error => {
+                                    console.log('Error fetching data:', error);
+                            });
+            }
+            
+            // Функция для обновления всех диаграмм при выборе города
+            function updateAllCharts(city) {
+                    updateChart('pm10', city, 'pm10Chart', 'pm10Info');
+                    updateChart('co', city, 'coChart', 'coInfo');
+                    updateChart('so2', city, 'so2Chart', 'so2Info');
+                    updateChart('no2', city, 'no2Chart', 'no2Info');
+                    updateChart('pm2_5', city, 'pm25Chart', 'pm25Info');
+            }
+            
+            // Инициализируем диаграммы для городов по умолчанию (Алматы)
+            updateAllCharts('Ust-Kamenogorsk');
+            
+        </script>
+        </section>
+
+
+        <!-- Start Footer Section -->
+        <footer>
+            <div class="bg-footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-top">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Біз туралы</h3>
+                                        </div>
+                                        <!-- .widgets-content -->
+                                        <div class="address-box">
+                                            <ul class="address">
+                                                <li>
+                                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                                    <span>Алматы қ., Қазақстан.</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <span>Дүйсенбі-Жұма: 9: 00-18: 00</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                    <span>ecology.modeling@gmail.com</span>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- .address -->
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Жаңалықтар</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <ul class="latest-news">
+                                            <li>
+                                                <span class="thumbnail-img">
+												<img src="assets/images/home01/small-bog-img-1.jpg" alt="small-bog-img-1" class="img-responsive" />
+											</span>
+                                                <div class="thumbnail-content">
+                                                    <h5><a href="https://anatili.kazgazeta.kz/news/62869?fbclid=IwAR18KcOekeUIq5edq4c0yVAAmljpTOmRi6Cvjpbo1wxG20G1OiH2N3I9Zgc_aem_AXEEr6_KtelQO1-xgrcfvnW7lohVZoDeABHQ2K5Wl5Pu2tY7zqo5QgTsyu_mGGI37xU&mibextid=Zxz2cZ">Соңғы жаңалықтар</a></h5>
+                                                    <span class="post-date">04 Сәуір 2024</span>
+                                                </div>
+                                                <!-- .thumbnail-content -->
+                                            </li>
+                                            <li>
+                                                <span class="thumbnail-img">
+												<img src="assets/images/home01/small-bog-img-2.jpg" alt="small-bog-img-2" class="img-responsive" />
+											</span>
+                                                <div class="thumbnail-content">
+                                                    <h5><a href="https://www.youtube.com/watch?v=qGqOelzmvQU">Соңғы жаңалықтар</a></h5>
+                                                    <span class="post-date">04 Сәуір 2024</span>
+                                                </div>
+                                                <!-- .thumbnail-content -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Әлеуметтік желілер</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <ul class="twitter-widget">
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://www.facebook.com/profile.php?id=61558045298547&mibextid=LQQJ4d">Біздің Facebook парақшамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://www.instagram.com/air.pollution.modeling?igsh=Y2FqeDEzMTFkcmhn&utm_source=qr">Біздің Instagram парақшамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-telegram" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://t.me/ecologymodeling">Біздің Telegram арнамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                        </ul>
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Галерея</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <div class="footer-instagram">
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-1.jpg" alt="footer-instagram-img-1" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-2.jpg" alt="footer-instagram-img-2" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-3.jpg" alt="footer-instagram-img-3" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-4.jpg" alt="footer-instagram-img-4" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-5.jpg" alt="footer-instagram-img-5" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-6.jpg" alt="footer-instagram-img-6" /></a>
+                                        </div>
+                                        <!-- .footer-instagram -->
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                            </div>
+                            <!-- .row -->
+                        </div>
+                        <!-- .footer-top -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .bg-footer-top -->
+
+            <div class="bg-footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-bottom">
+                            <div class="copyright-txt">
+                                <p>&copy; 2024. National Engineering Academy of RK</a></p>
+                            </div>
+                            <!-- .copyright-txt -->
+                            <div class="social-box">
+                                <ul class="social-icon-rounded">
+                                    <li><a href="https://www.facebook.com/profile.php?id=61558045298547&mibextid=LQQJ4d"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com/air.pollution.modeling?igsh=Y2FqeDEzMTFkcmhn&utm_source=qr"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://t.me/ecologymodeling"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+
+                                </ul>
+                            </div>
+                            <!-- .social-box -->
+
+                        </div>
+                        <!-- .footer-bottom -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .bg-footer-bottom -->
+
+        </footer>
+        <!-- End Footer Section -->
+
+
+        <!-- Start Scrolling -->
+        <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+        <!-- End Scrolling -->
+
+
+    </div>
+
+
+    <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+    <script type="text/javascript" src="assets/js/lightcase.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nstSlider.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="assets/js/custom.map.js"></script>
+    <script type="text/javascript" src="assets/js/plugins.isotope.js"></script>
+    <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="assets/js/custom.isotope.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+
+
+
+
+</body>
+
+</html>

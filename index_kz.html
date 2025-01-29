@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en, ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Air Pollution</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <!-- Plugin css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/lightcase.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.nstSlider.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/flexslider.css" media="all" />
+
+    <!-- own style css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/rtl.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css" media="all" />
+    <style>
+        .btn-custom {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 15px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .btn-custom:hover {
+            background-color: #e9e9e9;
+        }
+        .card {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+				.weatherAndPollutionData {
+					font-family: 'Courier New', Courier, monospace;
+					color: #333;
+					background-color: #f9f9f9;
+					padding: 10px;
+					border-radius: 5px;
+					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+			.card {
+				font-family: Verdana, sans-serif;
+				color: #ffffff;
+				background-color: #ffffff;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+				font-size: 18px;
+		}
+        body {
+            display: flex;
+            flex-direction: column; /* Колонное расположение */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        #data-container {
+            text-align: center; /* Центрирование текста внутри блока */
+            margin-bottom: 20px; /* Отступ снизу */
+            font-family: Verdana, sans-serif; 
+            font-size: 32px; 
+            color: green;
+        }
+        
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gallery img {
+            width: 150px;
+            height: 300px;
+            margin: 5px;
+            border-radius: 15px; /* Закругление углов */
+            border: 4px solid rgb(214, 249, 19); 
+        }
+        #recommendation {
+            margin-top: 20px; /* Отступ сверху */
+            text-align: center; /* Центрирование текста */
+            font-family: Verdana, sans-serif; 
+            font-size: 16px; 
+            color: gray;
+        }
+		
+    </style>
+    <style>
+        .text-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-description {
+            font-size: 1rem;
+            color: #000000;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .text-advice {
+            font-size: 1rem;
+            color: #e74c3c; /* Красный оттенок для акцента */
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+
+        .text-general {
+            font-size: 1rem;
+            color: #27ae60; /* Зеленый оттенок для позитива */
+            font-weight: 500;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="box-style">
+        <div class="color-btn">
+            <a href="#"><i class="fa fa-cog fa-spin" aria-hidden="true"></i></a>
+        </div>
+        <div class="box-style-inner">
+            <h3>Box Layout</h3>
+            <div class="box-element">
+                <div class="box-heading">
+                    <h5>HTML Layout</h5>
+                </div>
+                <div class="box-content">
+                    <ul class="box-customize">
+                        <li><a class="boxed-btn" href="#">Boxed</a></li>
+                        <li><a class="wide-btn" href="#">Wide</a></li>
+                        <li><a class="rtl-btn" href="#">Rtl</a></li>
+                        <li><a class="ltl-btn" href="#">Ltl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box-element">
+                <div class="box-heading">
+                    <h5>Backgroud Images</h5>
+                </div>
+                <div class="box-content">
+                    <ul class="box-bg-img">
+                        <li>
+                            <a class="bg-1" href="#"><img src="assets/images/box-style/01.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-2" href="#"><img src="assets/images/box-style/02.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-3" href="#"><img src="assets/images/box-style/03.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-4" href="#"><img src="assets/images/box-style/04.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-5" href="#"><img src="assets/images/box-style/05.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-6" href="#"><img src="assets/images/box-style/06.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-7" href="#"><img src="assets/images/box-style/07.jpg" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="bg-8" href="#"><img src="assets/images/box-style/08.jpg" alt="greenforest"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box-element">
+                <div class="box-heading">
+                    <h5>Backgroud Pattern</h5>
+                </div>
+                <div class="box-content">
+                    <ul class="box-pattern-img">
+                        <li>
+                            <a class="pt-1" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/01.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-2" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/02.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-3" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/03.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-4" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/04.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-5" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/05.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-6" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/06.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-7" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/07.png" alt="greenforest"></a>
+                        </li>
+                        <li>
+                            <a class="pt-8" href="#"><img src="https://www.codexcoder.com/images/auror/pt-image/08.png" alt="greenforest"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Start Pre-Loader-->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Pre-Loader -->
+
+
+    <div class="box-layout">
+
+        <!-- End Pre-Loader -->
+        <header class="header-style-2">
+            <!-- .bg-header-top -->
+            <!-- Start Menu -->
+            <div class="bg-main-menu menu-scroll">
+                <div class="container">
+                    <div class="row">
+                        <div class="main-menu">
+                            <div class="main-menu-bottom">
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="index_kz.html"><img src="assets/images/home01/logo.png" alt="logo" class="img-responsive" /></a>
+                                    <button type="button" class="navbar-toggler collapsed d-lg-none" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span class="navbar-toggler-icon">
+                                            <i class="fa fa-bars"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="main-menu-area">
+                                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                                        <ul>
+                                            <li>
+                                                <a href="index_kz.html" class="active">Басты бет</a>
+                                            <li> 
+                                            <li>
+                                                <a href="data_kz.html"></i>Жылдар бойынша деректер</a>
+                                            </li>
+                                            <!-- <a href="#">Данные</a> -->
+                                            <!-- <ul class="sub-menu">
+                                                <li>
+                                                    <a href="data.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Исторические данные</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Данные по годам</a>
+                                                </li>
+                                            </ul> -->
+                                            </li>
+                                            <li><a href="project_kz.html">Статистика</a></li>
+                                            <li><a href="about_kz.html">Жоба туралы</a></li>
+                                            <li>
+                                                <a href="team_kz.html">Орындаушылар</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Тілі</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <a href="index_kz.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Қазақша</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="index.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Русский</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="index_eng.html"><i class="fa fa-angle-double-right" aria-hidden="true"></i>English</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="menu-right-option pull-right">
+                                            <!-- <div class="search-box">
+                                                <i class="fa fa-search first_click" aria-hidden="true" style="display: block;"></i>
+                                                <i class="fa fa-times second_click" aria-hidden="true" style="display: none;"></i>
+                                            </div> -->
+                                            <!-- <div class="search-box-text">
+                                                <form action="search">
+                                                    <input type="text" name="search" id="all-search" placeholder="Search Here">
+                                                </form>
+                                            </div> -->
+                                        </div>
+                                        <!-- .header-search-box -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Start Slider Section -->
+        <section class="bg-slider-option">
+            <div class="slider-option slider-two">
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-1.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-2.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-3.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-4.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-5.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <div class="slider-item">
+                                <img src="assets/images/home02/slider-img-6.jpg" alt="bg-slider-2">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6">
+                                                <div class="slider-content">
+                                                    <h3>Қоршаған орта жағдайын бақылау</h3>
+                                                    <h2>Тереңірек дем алыңыз: бізбен бірге ауа сапасы туралы біліңіз</h2>
+                                                    <p>Сіздің денсаулығыңыз таза ауадан басталады</p>
+                                                    <div class="slider-btn">
+                                                        <a href="mapbox_usk.html" class="btn btn-default">КАРТА</a>
+                                                        <!-- <a href="donate.html" class="btn btn-default">WRF & SILAM</a> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="left carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="right carousel-control carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- End Slider Section -->
+
+
+        <section class="bg-recent-project">
+            <div class="container">
+                <div class="row">
+                    <div class="recent-project">
+                        <div class="section-header">
+                            <h2>Қазақстан қалаларының ауа жағдайы</h2>
+                            <p>Атмосфералық ауаның ластану деңгейін және Қазақстан қалаларының метеорологиялық жағдайларын біліңіз. Қаланы таңдау үшін төмендегі батырманы басыңыз.</p>
+                        </div>
+                    </div>
+                    <!-- .recent-project -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+            <!-- Кнопка dropdown -->
+            <div class="dropdown text-center" style="margin-left: 15%; margin-right: 15%; margin-top: 2%; margin-bottom: 3%;">
+                <button class="btn btn-custom dropdown-toggle btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Қаланы таңдаңыз
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Алматы')">Алматы</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Өскемен')">Өскемен</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Қарағанды')">Қарағанды</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Астана')">Астана</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Шымкент')">Шымкент</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Ақтау')">Ақтау</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Атырау')">Атырау</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Ақтөбе')">Ақтөбе</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Семей')">Семей</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Павлодар')">Павлодар</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Қызылорда')">Қызылорда</a>
+                    <a class="dropdown-item" href="#" onclick="getWeatherAndPollutionData('Тараз')">Тараз</a>
+                </div>
+            </div>
+            <!-- Отображение выбранного города -->
+            <h2 id="selectedCity" class="text-center mb-3"></h2>
+            <!-- Здесь будет отображаться информация о погоде и загрязнении воздуха -->
+            <div id="weatherAndPollutionData" class="row justify-content-center" style="margin-left: 5%; margin-right: 5%;">
+                <!-- Здесь будет отображаться информация о погоде и загрязнении воздуха -->
+            </div>
+        </section>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                getWeatherAndPollutionData('Өскемен');
+            });
+
+            async function getWeatherAndPollutionData(cityName) {
+                const selectedCityElement = document.getElementById('selectedCity');
+                selectedCityElement.innerText = `${cityName} қаласы`;
+        
+                const cities = {
+                    "Алматы": { lat: 43.2220, lon: 76.8512 },
+                    "Өскемен": { lat: 49.9639, lon: 82.6094 },
+                    "Қарағанды": { lat: 49.8139, lon: 73.0951 },
+                    "Астана": { lat: 51.1694, lon: 71.4491 },
+                    "Шымкент": { lat: 42.3176, lon: 69.5918 },
+                    "Ақтау": { lat: 43.6561, lon: 51.1684 },
+                    "Атырау": { lat: 47.1164, lon: 51.8839 },
+                    "Ақтөбе": { lat: 50.2797, lon: 57.2072 },
+                    "Семей": { lat: 50.4196, lon: 80.2454 },
+                    "Павлодар": { lat: 52.2871, lon: 76.9533 },
+                    "Қызылорда": { lat: 44.8528, lon: 65.5094 },
+                    "Тараз": { lat: 42.9016, lon: 71.3645 }
+                };
+                
+        
+                const city = cities[cityName];
+                fetchData(city.lat, city.lon);
+                
+                const weatherAndPollutionContainer = document.getElementById('weatherAndPollutionData');
+                weatherAndPollutionContainer.innerHTML = ''; // Очищаем контейнер перед обновлением
+        
+                try {
+                    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&appid=485931c576bd9f9b501a900f5ccdc4bd`);
+                    const weatherData = await weatherResponse.json();
+        
+                    const pollutionResponse = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${city.lat}&lon=${city.lon}&appid=485931c576bd9f9b501a900f5ccdc4bd`);
+                    const pollutionData = await pollutionResponse.json();
+        
+                    if (weatherData && pollutionData && pollutionData.list && pollutionData.list.length > 0 && pollutionData.list[0].components) {
+                        // Создаем карточки для погодных данных
+                        const temperatureCelsius = Math.round(weatherData.main.temp - 273.15);
+                        const humidity = weatherData.main.humidity;
+                        const windSpeed = weatherData.wind.speed;
+        
+                        const temperatureCard = createWeatherCard("Температура", `${temperatureCelsius} °C`);
+                        const humidityCard = createWeatherCard("Ылғалдылық", `${humidity}%`);
+                        const windSpeedCard = createWeatherCard("Желдің жылдамдығы", `${windSpeed} м/с`);
+        
+                        weatherAndPollutionContainer.appendChild(temperatureCard);
+                        weatherAndPollutionContainer.appendChild(humidityCard);
+                        weatherAndPollutionContainer.appendChild(windSpeedCard);
+        
+                        // Создаем карточки для данных о загрязнении
+                        const aqi = pollutionData.list[0].main.aqi;
+                        const pm10 = pollutionData.list[0].components.pm10;
+                        const pm25 = pollutionData.list[0].components.pm2_5;
+                        const so2 = pollutionData.list[0].components.so2;
+                        const no2 = pollutionData.list[0].components.no2;
+                        const co = pollutionData.list[0].components.co;
+
+                        const aqiCard = createPollutionCard("AQI", `${aqi}`);
+                        const pm10Card = createPollutionCard("PM10", `${pm10} мкг/м³`);
+                        const pm25Card = createPollutionCard("PM2.5", `${pm25} мкг/м³`);
+                        const so2Card = createPollutionCard("Күкірт диоксиді SO2", `${so2} мкг/м³`);
+                        const no2Card = createPollutionCard("Азот диоксиді NO2", `${no2} мкг/м³`);
+                        const coCard = createPollutionCard("Көміртек оксиді CO", `${co} мкг/м³`);
+        
+                        weatherAndPollutionContainer.appendChild(aqiCard);
+                        weatherAndPollutionContainer.appendChild(pm10Card);
+                        weatherAndPollutionContainer.appendChild(pm25Card);
+                        weatherAndPollutionContainer.appendChild(so2Card);
+                        weatherAndPollutionContainer.appendChild(no2Card);
+                        weatherAndPollutionContainer.appendChild(coCard);
+                    }
+                } catch (error) {
+                    console.error('Ошибка при получении данных о погоде и загрязнении воздуха:', error);
+                }
+            }
+        
+            function createWeatherCard(title, value) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'col-lg-3', 'col-sm-6', 'col-12');
+                card.style.backgroundColor = 'rgb(150, 226, 242)';
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h4 class="card-subtitle mb-2 text-muted">${title}</h4>
+                        <h4 class="card-title">${value}</h4>
+                    </div>
+                `;
+                return card;
+            }
+            
+        
+            function createPollutionCard(title, value) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'col-lg-3', 'col-sm-6', 'col-12', 'clearfix');
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h4 class="card-subtitle mb-2 text-muted">${title}</h4>
+                        <h4 class="card-title">${value}</h4>
+                    </div>
+                `;
+        
+                // Установка цвета в зависимости от значения загрязнителя
+                const pollutionValue = parseFloat(value);
+                if (title === "AQI") { 
+                    if (pollutionValue > 4) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 2.5 && pollutionValue <= 3) {
+                        card.style.backgroundColor = "rgb(237, 182, 30)";
+                    } else if (pollutionValue > 1.5 && pollutionValue <= 2) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else if (pollutionValue > 0 && pollutionValue <= 1) {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    } else {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    }
+                } else if (title === "PM10") { 
+                    if (pollutionValue > 30) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 6 && pollutionValue <= 30) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    }
+                } else if (title === "PM2.5") {
+                    if (pollutionValue > 16) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 3.5 && pollutionValue <= 16) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    }
+                } else if (title === "Күкірт диоксиді SO2") {
+                    if (pollutionValue > 50) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 5 && pollutionValue <= 50) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    }
+                } else if (title === "Азот диоксиді NO2") {
+                    if (pollutionValue > 20) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 4 && pollutionValue <= 20) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    }
+                } else if (title === "Көміртек оксиді CO") {
+                    if (pollutionValue > 500) {
+                        card.style.backgroundColor = "rgb(242, 79, 79)";
+                    } else if (pollutionValue > 300 && pollutionValue <= 500) {
+                        card.style.backgroundColor = "rgb(237, 182, 30)";
+                    } else if (pollutionValue > 100 && pollutionValue <= 300) {
+                        card.style.backgroundColor = "rgb(242, 226, 89)";
+                    } else {
+                        card.style.backgroundColor = "rgb(161, 242, 121)";
+                    }
+                }
+                return card;
+            }
+        </script>
+        
+
+        <section class="bg-about-greenforest">
+            <div class="container">
+                <div class="row">
+                    <div class="about-greenforest">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="about-greenforest-content">
+                                    <h2>Атмосфераның ластану индексі (AQI)</h2>
+                                    <p><span>Атмосфераның ластану индексі (AQI) атмосфераның ластану деңгейін және оның адам денсаулығына ықтимал әсерін бағалау үшін қолданылатын негізгі көрсеткіш болып табылады.</span></p>
+                                    <p> Бұл индекс атмосфералық ауадағы әртүрлі заттардың орташа тәуліктік концентрациясына негізделген. Бұл тәсіл ластаушы заттардың қоршаған ортаға және адамдардың денсаулығына ұзақ әсер етуінің әсерін ескеруге мүмкіндік береді. Атмосфераның ластану индексі белгілі бір уақыт аралығында белгілі бір аймақта жиналған ауа сапасы туралы деректерді жалпылауға және талдауға мүмкіндік беретін құрал болып табылады. Улы газдар, бөлшектер және басқалар сияқты әртүрлі ластаушы заттардың құрамын бағалау арқылы ИЗА халықтың денсаулығына қауіп деңгейін анықтауға және ауа сапасын жақсарту және қоғамдық денсаулықты қорғау үшін тиісті шараларды қабылдауға көмектеседі.</p>
+                                    <a href="https://en.wikipedia.org/wiki/Air_quality_index" class="btn btn-default">толығырақ</a>
+                                </div>
+                                <!-- .about-greenforest-content -->
+                            </div>
+                            <!-- .col-lg-8 -->
+                            <div class="col-lg-4">
+                                <div class="about-greenforest-img">
+                                    <img src="assets/images/home02/about-greenforet-img.png" alt="about-greenforet-img" class="img-responsive" />
+                                </div>
+                                <!-- .about-greenforest-img -->
+                            </div>
+                            <!-- .col-md-4 -->
+                        </div>
+                    </div>
+                    <!-- .about-greenforest -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End About Greenforest Section -->
+        
+
+
+        
+        <body>
+            <div class="dropdown text-center">
+                <button class="btn btn-custom dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    Қаланы таңдаңыз
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" onclick="selectCity('Алматы')">Алматы</a>
+                    <a class="dropdown-item" onclick="selectCity('Өскемен')">Өскемен</a>
+                    <a class="dropdown-item" onclick="selectCity('Қарағанды')">Қарағанды</a>
+                    <a class="dropdown-item" onclick="selectCity('Астана')">Астана</a>
+                    <a class="dropdown-item" onclick="selectCity('Шымкент')">Шымкент</a>
+                    <a class="dropdown-item" onclick="selectCity('Ақтау')">Ақтау</a>
+                    <a class="dropdown-item" onclick="selectCity('Атырау')">Атырау</a>
+                    <a class="dropdown-item" onclick="selectCity('Ақтөбе')">Ақтөбе</a>
+                    <a class="dropdown-item" onclick="selectCity('Семей')">Семей</a>
+                    <a class="dropdown-item" onclick="selectCity('Павлодар')">Павлодар</a>
+                    <a class="dropdown-item" onclick="selectCity('Қызылорда')">Қызылорда</a>
+                    <a class="dropdown-item" onclick="selectCity('Тараз')">Тараз</a>
+                </div>
+            </div>
+            <div id="data-container">
+                <div id="city-name" class="city-name">Қала: Жүктеу...</div>
+                <div id="aqi">AQI: Жүктеу...</div>
+            </div>
+            
+            <div class="gallery">
+              <img src="green1.png" id="img-green" class="aqi-image img-small" alt="Good">
+              <img src="yellow1.png" id="img-yellow" class="aqi-image img-small" alt="Moderate">
+              <img src="orange1.png" id="img-orange" class="aqi-image img-small" alt="Unhealthy for sensitive groups">
+              <img src="red1.png" id="img-red" class="aqi-image img-small" alt="Unhealthy">
+              <img src="purple1.png" id="img-purple" class="aqi-image img-small" alt="Very Unhealthy">
+              <img src="maroon1.png" id="img-maroon" class="aqi-image img-small" alt="Hazardous">  
+            </div>
+            
+            
+            <div id="recommendation">Ұсыныстар: Жүктеу...</div>
+            
+
+
+            <script src="key_kz.js"></script>
+        </body>
+
+        <!-- Start our volunteers Section -->
+        <section class="bg-volunteers-section">
+            <div class="container">
+                <div class="row">
+                    <div class="volunteers-option">
+                        <div class="section-header">
+                            <h2>AQI бойынша қалалар рейтингі</h2>
+                            <p>Төменде атмосфералық ауаның ластану деңгейі бойынша Қазақстан қалаларының рейтингі берілген.</p>
+                        </div>
+                        <!-- .section-header -->
+                        <div id="citySection">
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .volume-option -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End our volunteers Section -->
+
+
+
+        
+        <!-- Start Testimonial Section -->
+        <section class="bg-testimonial-section">
+            <div class="testimonial-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="testimonial-option">
+                            <div class="section-header">
+                                <h2>Сұрақтар мен жауаптар</h2>
+                                <p>Бұл бөлімде сіз өзіңізді қызықтыратын сұрақтарға жауап ала аласыз.</p>
+                            </div>
+                            <!-- Вопрос -->
+                            <button class="question-btn">Ауа сапасының нашарлығы адамның денсаулығына қалай әсер етеді?<span class="plus">+</span></button>
+                            <!-- Ответ -->
+                            <div class="answer">
+                                <p >ДДҰ деректері ауаның ластануы мезгілсіз өлімнің негізгі себептерінің бірі болып табылады, инсульт, өкпе рагы, жүрек және тыныс алу аурулары және т. б.</p>
+                            </div>
+                            <!-- Вопрос -->
+                            <button class="question-btn">Ауаның ластануына не себеп болады?<span class="plus">+</span></button>
+                            <!-- Ответ -->
+                            <div class="answer">
+                                <p >ЮНЕП мәліметтері бойынша, ауаның ластануы негізінен адам қызметінің бес түрінен туындайды: көлік, өнеркәсіп, қалдықтар, ауыл шаруашылығы және үй шаруашылығы.</p>
+                            </div>
+                            <button class="question-btn">Ауаның ластануымен қалай күресуге болады?<span class="plus">+</span></button>
+                            <!-- Ответ -->
+                            <div class="answer">
+                                <p >Ауаның ластануымен күресу үшін қоғамдық көлікті дамыту, электромобильдерді пайдалану, өнеркәсіптегі ең жақсы қолжетімді технологияларды және жаңартылатын энергия көздерін пайдалану қажет. Қазба отындарын пайдалануды азайту, қалаларды белсенді көгалдандыру, халықтың хабардарлығын арттыру және қатаң экологиялық заңдарды енгізу маңызды.</p>
+                            </div>
+                            <button class="question-btn">Қай елде ең лас ауа бар?<span class="plus">+</span></button>
+                            <!-- Ответ -->
+                            <div class="answer">
+                                <p >2024 жылы атмосфералық ауа сапасы бойынша ең ластанған ел (PM2.5) Бангладеш болып табылады. Оның артынан Пәкістан мен Үндістан келеді.</p>
+                            </div>
+                            <button class="question-btn">Қазақстан ауаның ластануы бойынша қай жерде?<span class="plus">+</span></button>
+                            <!-- Ответ -->
+                            <div class="answer">
+                                <p >IQair рейтингінің деректері бойынша Қазақстан ауа сапасы бойынша 134 ел арасында 40-шы орынға ие болды.</p>
+                            </div>
+                            <!-- .testmonial-container -->
+                        </div>
+                        <!-- .testimonial-option -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .testimonial-overlay -->
+        </section>
+        <!-- End Testimonial Section -->
+
+        <style>
+            /* Стили для кнопки */
+            .question-btn {
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                position: relative;
+                width: calc(100% - 40px); /* Растягиваем кнопку по горизонтали */
+            }
+          
+            /* Стили для плюса */
+            .plus {
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          
+            /* Общие стили для вопроса и ответа */
+            .question, .answer {
+                display: none;
+                background-color: #f4f4f4;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 5px;
+                width: calc(100% - 40px); /* Растягиваем вопрос и ответ по горизонтали с учетом внутренних отступов */
+
+            }
+          </style>
+          
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Находим все кнопки и ответы
+                var questionBtns = document.querySelectorAll('.question-btn');
+                var answers = document.querySelectorAll('.answer');
+        
+                // Устанавливаем изначальное состояние для всех ответов
+                answers.forEach(function(answer) {
+                    answer.style.display = 'none';
+                });
+        
+                // Добавляем обработчик клика на каждую кнопку
+                questionBtns.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        // Переключаем отображение соответствующего ответа (скрываем или показываем)
+                        var answer = button.nextElementSibling;
+                        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+                    });
+                });
+            });
+        </script>
+        
+
+
+
+        
+        <style>
+            .card1 {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 5px 10px;
+                margin: 10px auto;
+                max-width: 500px;
+                text-align: center;
+            }
+            .good { background-color: #a3e496; }
+            .moderate { background-color: #f2f56d; }
+            .unhealthy { background-color: #f7ac57; }
+            .very-unhealthy { background-color: #f77070; }
+            .hazardous { background-color: #a85858; }
+        </style>
+        
+        
+        <script>
+            // Функция для получения данных по API
+            async function fetchData(lat, lon) {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=485931c576bd9f9b501a900f5ccdc4bd`);
+                const data = await response.json();
+                return data;
+            }
+        
+            // Функция для отображения данных на странице
+            async function displayData() {
+                const cities = [
+                    { name: "Алматы", lat: "43.238949", lon: "76.889709" },
+                    { name: "Астана", lat: "51.169392", lon: "71.449074" },
+                    { name: "Шымкент", lat: "42.317131", lon: "69.591797" },
+                    { name: "Ақтөбе", lat: "50.2797", lon: "57.2072" },
+                    { name: "Атырау", lat: "47.1167", lon: "51.9200" },
+                    { name: "Ақтау", lat: "43.6496", lon: "51.1709" },
+                    { name: "Өскемен", lat: "49.9582", lon: "82.6119" },
+                    { name: "Павлодар", lat: "52.2871", lon: "76.9407" },
+                    { name: "Тараз", lat: "42.9000", lon: "71.3667" },
+                    { name: "Қызылорда", lat: "44.8500", lon: "65.5000" },
+                    { name: "Қарағанды", lat: "49.7939", lon: "73.0997" }
+                ];
+        
+                // Очищаем раздел с городами
+                const citySection = document.getElementById('citySection');
+                citySection.innerHTML = '';
+        
+                // Получаем и отображаем данные для каждого города
+                const cityData = [];
+                for (const city of cities) {
+                    const aqiData = await fetchData(city.lat, city.lon);
+                    cityData.push({ name: city.name, aqi: aqiData.list[0].main.aqi });
+                }
+        
+                // Сортируем города по убыванию уровня AQI
+                cityData.sort((a, b) => b.aqi - a.aqi);
+        
+                // Создаем карточки для городов и добавляем их в раздел
+                cityData.forEach(city => {
+                    const card1 = document.createElement('div');
+                    card1.classList.add('card1');
+        
+                    // Определяем класс цвета в зависимости от уровня AQI
+                    let colorClass;
+                    if (city.aqi <= 1) {
+                        colorClass = 'good';
+                    } else if (city.aqi <= 2) {
+                        colorClass = 'moderate';
+                    } else if (city.aqi <= 3) {
+                        colorClass = 'unhealthy';
+                    } else if (city.aqi <= 4) {
+                        colorClass = 'very-unhealthy';
+                    } else {
+                        colorClass = 'hazardous';
+                    }
+        
+                    card1.classList.add(colorClass);
+                    card1.textContent = `${city.name}: ${city.aqi}`;
+                    citySection.appendChild(card1);
+                });
+            }
+        
+            // Вызываем функцию для отображения данных при загрузке страницы
+            displayData();
+        </script>
+          
+        
+        
+
+        <!-- Start Focus Cause Section -->
+        <section class="bg-focus-cause-section2">
+            <div class="container">
+                <div class="row">
+                    <div class="focus-cause">
+                        <div class="section-header">
+                            <h2>Қосымша ақпарат көздері</h2>
+                        </div>
+                        <!-- .section-header -->
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <a href="https://www.aqi.in/"><img src="assets/images/home02/cause-img-1.jpg" alt="cause-img-1" class="img-responsive" /></a>
+                                    <div class="cause-content">
+                                        <!-- .price-title -->
+                                        <!-- .progress -->
+                                        <h4><a href="https://www.aqi.in/">Ауаның ластануы туралы халықаралық деректер</a></h4>
+                                    </div>
+                                    <!-- .cause-content -->
+                                </div>
+                                <!-- .cause-items -->
+                            </div>
+                            <!-- .col-md-4 -->
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <a href="https://www.iqair.com/ru/kazakhstan/almaty-qalasy/almaty"><img src="assets/images/home02/cause-img-2.jpg" alt="cause-img-1" class="img-responsive" /></a>
+                                    <div class="cause-content">
+                                        <!-- .price-title -->
+                                        <!-- .progress -->
+                                        <h4><a href="https://www.iqair.com/ru/kazakhstan/almaty-qalasy/almaty">Ауа сапасының индексі (AQI) және атмосфераның ластануы</a></h4>
+                                    </div>
+                                    <!-- .cause-content -->
+                                </div>
+                                <!-- .cause-items -->
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-12">
+                                <div class="cause-items">
+                                    <a href="https://www.airkaz.org/"><img src="assets/images/home02/cause-img-3.jpg" alt="cause-img-1" class="img-responsive" /></a>
+                                    <div class="cause-content">
+                                        <!-- .price-title -->
+                                        <!-- .progress -->
+                                        <h4><a href="https://www.airkaz.org/">Орталық Азия қалаларының ластануы туралы деректер</a></h4>
+                                    </div>
+                                    <!-- .cause-content -->
+                                </div>
+                                <!-- .cause-items -->
+                            </div>
+                        </div>
+                        
+                        <!-- .row -->
+                    </div>
+                    <!-- .focus-cause -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- End Focus Cause Section -->
+
+
+        <!-- Start Footer Section -->
+        <footer>
+            <div class="bg-footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-top">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Біз туралы</h3>
+                                        </div>
+                                        <!-- .widgets-content -->
+                                        <div class="address-box">
+                                            <ul class="address">
+                                                <li>
+                                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                                    <span>Алматы қ., Қазақстан.</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <span>Дүйсенбі-Жұма: 9: 00-18: 00</span>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                    <span>ecology.modeling@gmail.com</span>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- .address -->
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Жаңалықтар</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <ul class="latest-news">
+                                            <li>
+                                                <span class="thumbnail-img">
+												<img src="assets/images/home01/small-bog-img-1.jpg" alt="small-bog-img-1" class="img-responsive" />
+											</span>
+                                                <div class="thumbnail-content">
+                                                    <h5><a href="https://anatili.kazgazeta.kz/news/62869?fbclid=IwAR18KcOekeUIq5edq4c0yVAAmljpTOmRi6Cvjpbo1wxG20G1OiH2N3I9Zgc_aem_AXEEr6_KtelQO1-xgrcfvnW7lohVZoDeABHQ2K5Wl5Pu2tY7zqo5QgTsyu_mGGI37xU&mibextid=Zxz2cZ">Соңғы жаңалықтар</a></h5>
+                                                    <span class="post-date">04 Сәуір 2024</span>
+                                                </div>
+                                                <!-- .thumbnail-content -->
+                                            </li>
+                                            <li>
+                                                <span class="thumbnail-img">
+												<img src="assets/images/home01/small-bog-img-2.jpg" alt="small-bog-img-2" class="img-responsive" />
+											</span>
+                                                <div class="thumbnail-content">
+                                                    <h5><a href="https://www.youtube.com/watch?v=qGqOelzmvQU">Соңғы жаңалықтар</a></h5>
+                                                    <span class="post-date">04 Сәуір 2024</span>
+                                                </div>
+                                                <!-- .thumbnail-content -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Әлеуметтік желілер</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <ul class="twitter-widget">
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://www.facebook.com/profile.php?id=61558045298547&mibextid=LQQJ4d">Біздің Facebook парақшамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://www.instagram.com/air.pollution.modeling?igsh=Y2FqeDEzMTFkcmhn&utm_source=qr">Біздің Instagram парақшамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                            <li>
+                                                <div class="twitter-icon"><i class="fa fa-telegram" aria-hidden="true"></i></div>
+                                                <div class="twitter-content">
+                                                    <h5><a href="https://t.me/ecologymodeling">Біздің Telegram арнамыз</a></h5>
+                                                </div>
+                                                <!-- .twitter-content -->
+                                            </li>                                            
+                                        </ul>
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                                <div class="col-lg-3 col-sm-6 col-12">
+                                    <div class="footer-widgets">
+                                        <div class="widgets-title">
+                                            <h3>Галерея</h3>
+                                        </div>
+                                        <!-- .widgets-title -->
+                                        <div class="footer-instagram">
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-1.jpg" alt="footer-instagram-img-1" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-2.jpg" alt="footer-instagram-img-2" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-3.jpg" alt="footer-instagram-img-3" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-4.jpg" alt="footer-instagram-img-4" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-5.jpg" alt="footer-instagram-img-5" /></a>
+                                            <a href="#"><img src="assets/images/home01/footer-instagram-img-6.jpg" alt="footer-instagram-img-6" /></a>
+                                        </div>
+                                        <!-- .footer-instagram -->
+                                    </div>
+                                    <!-- .footer-widgets -->
+                                </div>
+                                <!-- .col-lg-3 -->
+                            </div>
+                            <!-- .row -->
+                        </div>
+                        <!-- .footer-top -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .bg-footer-top -->
+
+            <div class="bg-footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-bottom">
+                            <div class="copyright-txt">
+                                <p>&copy; 2024. National Engineering Academy of RK</a></p>
+                            </div>
+                            <!-- .copyright-txt -->
+                            <div class="social-box">
+                                <ul class="social-icon-rounded">
+                                    <li><a href="https://www.facebook.com/profile.php?id=61558045298547&mibextid=LQQJ4d"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com/air.pollution.modeling?igsh=Y2FqeDEzMTFkcmhn&utm_source=qr"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://t.me/ecologymodeling"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+
+                                </ul>
+                            </div>
+                            <!-- .social-box -->
+
+                        </div>
+                        <!-- .footer-bottom -->
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .container -->
+            </div>
+            <!-- .bg-footer-bottom -->
+
+        </footer>
+        <!-- End Footer Section -->
+
+
+        <!-- Start Scrolling -->
+        <div class="scroll-img"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
+        <!-- End Scrolling -->
+
+
+    </div>
+
+
+    <script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="assets/js/swiper.min.js"></script>
+    <script type="text/javascript" src="assets/js/lightcase.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nstSlider.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="assets/js/custom.map.js"></script>
+    <script type="text/javascript" src="assets/js/plugins.isotope.js"></script>
+    <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="assets/js/custom.isotope.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+
+
+
+
+</body>
+
+</html>

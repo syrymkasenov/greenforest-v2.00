@@ -1,0 +1,147 @@
+<div class="select-container">
+            <label for="pollutantSelect">Выберите загрязняющее вещество:</label>
+            <select id="pollutantSelect">
+                <option value="so2">SO2</option>
+                <option value="co">CO</option>
+                <option value="no2">NO2</option>
+                <option value="dust">Dust</option>
+                <option value="fenol">Fenol</option>
+            </select>            
+        </div>
+        
+        <!-- Контейнеры для графиков -->
+        <div style="width: 80%; margin: auto;">
+            <canvas id="so2Chart"></canvas>
+        </div>
+        <div style="width: 80%; margin: auto;">
+            <canvas id="coChart"></canvas>
+        </div>
+        <div style="width: 80%; margin: auto;">
+            <canvas id="no2Chart"></canvas>
+        </div>
+        <div style="width: 80%; margin: auto;">
+            <canvas id="dustChart"></canvas>
+        </div>
+        <div style="width: 80%; margin: auto;">
+            <canvas id="fenolChart"></canvas>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <script>
+            const fs = require('fs');
+        
+            // Пути к файлам с данными
+            const filePaths = {
+                years: 'years.json',
+                so2: 'so2.json',
+                co: 'co.json',
+                no2: 'no2.json',
+                dust: 'dust.json',
+                fenol: 'fenol.json'
+            };
+        
+            // Объект для хранения данных
+            const data = {};
+            const safeLevels = {
+                so2: 0.1,  // Сернистый газ
+                co: 0.1, // Окись углерода (в мкг/м³)
+                no2: 0.1,   // Двуокись азота
+                dust: 0.1, // Пыль
+                fenol: 0.1 // Фенол
+            };
+        
+            // Функция для чтения данных из файла и добавления в объект
+            function readFile(filePath) {
+                return new Promise((resolve, reject) => {
+                    fs.readFile(filePath, 'utf8', (err, content) => {
+                        if (err) {
+                            return reject(`Ошибка при чтении файла ${filePath}: ${err}`);
+                        }
+                        try {
+                            const parsedData = JSON.parse(content);
+                            resolve(parsedData);
+                        } catch (parseError) {
+                            reject(`Ошибка при парсинге файла ${filePath}: ${parseError}`);
+                        }
+                    });
+                });
+            }
+        
+            // Чтение всех файлов и запись данных в объект data
+            (async function() {
+                try {
+                    const [readYears, so2, co, no2, dust, fenol] = await Promise.all([
+                        readFile(filePaths.years),
+                        readFile(filePaths.so2),
+                        readFile(filePaths.co),
+                        readFile(filePaths.no2),
+                        readFile(filePaths.dust),
+                        readFile(filePaths.fenol)
+                    ]);
+        
+                    // Записываем данные в объект data
+                    data.years = readYears;
+                    data.so2 = so2;
+                    data.co = co;
+                    data.no2 = no2;
+                    data.dust = dust;
+                    data.fenol = fenol;
+        
+                    //console.log('Данные успешно прочитаны:', data);
+        
+                    // Инициализация графика по умолчанию (SO2)
+                    
+                } catch (error) {
+                    console.error('Ошибка при чтении файлов:', error);
+                }
+            })();
+        
+            // Функция для обновления графика на основе выбранного загрязнителя
+            function updateChart(pollutant) {
+                const chartData = {
+                    labels: data.years,
+                    datasets: [{
+                        label: pollutant + " (Концентрация)",
+                        data: data[pollutant],
+                        borderColor: 'rgba(0, 128, 0, 1)',  // Темно-зеленый цвет
+                        borderWidth: 2,
+                        fill: false
+                    }, {
+                        label: 'Безопасный уровень',
+                        data: data.years.map(() => safeLevels[pollutant]),
+                        borderColor: 'rgba(255, 0, 0, 1)',  // Красный цвет для безопасного уровня
+                        borderWidth: 1,
+                        borderDash: [5, 5],  // Пунктирная линия
+                        fill: false
+                    }]
+                };
+        
+                const chartOptions = {
+                    type: 'line',
+                    data: chartData
+                };
+        
+                // Удаляем все старые графики
+                const canvasElements = document.querySelectorAll('canvas');
+                canvasElements.forEach((canvas) => {
+                    canvas.style.display = 'none';
+                });
+
+                const chartElement = document.getElementById(pollutant + 'Chart');
+                chartElement.style.display = 'block';
+
+                // Создаем новый график
+                new Chart(chartElement.getContext('2d'), chartOptions);
+                
+            }
+                updateChart('so2');
+            // Слушатель изменения выбора загрязнителя
+            document.getElementById('pollutantSelect').addEventListener('change', (event) => {
+                updateChart(event.target.value);
+            });
+        </script>
+                
